@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Crypto Analyzer</h1>
+
+        <form method="post" action="/">
+            <label for="pair">Ingrese el par de monedas (por ejemplo, 'ETH/USDT'):</label>
+            <input type="text" name="pair" id="pair" required>
+
+            <br>
+
+            <label for="limit">Ingrese el límite (periodo):</label>
+            <input type="number" name="limit" id="limit" required>
+
+            <br>
+
+            <button type="submit">Enviar</button>
+        </form>
+
+        {% if error_message %}
+            <p class="error-message">{{ error_message|safe }}</p>
+        {% endif %}
+
+        {% if plot_base64 %}
+            <div class="result-container">
+                <h2>Resultado:</h2>
+                <img src="data:image/png;base64, {{ plot_base64 }}" alt="Gráfico">
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
